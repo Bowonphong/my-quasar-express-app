@@ -24,11 +24,11 @@ app.get('/api/demo', (req, res) => {
 
     res.json({
         git: {
-            title: 'Advanced Git Workflow',
+            title: 'Advanced Git Workflow บวรพงศ์ นาคสุข 6604101344',
             detail: 'ใช้ branch protection บน GitHub, code review ใน PR, และ squash merge เพื่อ history สะอาด'
         },
         docker: {
-            title: 'Advanced Docker',
+            title: 'Advanced Docker บวรพงศ์ นาคสุข 6604101344',
             detail: 'ใช้ multi-stage build, healthcheck ใน Dockerfile, และ orchestration ด้วย Compose/Swarm'
         }
     });
