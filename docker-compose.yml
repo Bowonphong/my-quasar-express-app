@@ -1,0 +1,36 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        API_URL: ""
+    image: tee344/my-quasar-frontend:latest
+    ports:
+      - "8080:80"
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: tee344/my-quasar-backend:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+    volumes:
+      - ./backend/logs:/app/logs  # Persist logs
+    networks:
+      - app-network
+    restart: unless-stopped
+    healthcheck:  # จาก Dockerfile
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000/api/demo"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  app-network:  # Network สำหรับสื่อสารระหว่าง services
